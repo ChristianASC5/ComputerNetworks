@@ -8,7 +8,7 @@ link_distance = 1000 * (10 ** 3)     # Each link is 3000 kilometers long
 propagation_speed = 1.9 * (10 ** 8)  # 1.8 * 10^8 meters/sec
 
 webpage_size = 13 * (10 ** 3)        # 17 kilobytes
-images = 11                          # 22 embedded images
+image_count = 11                          # 22 embedded images
 image_size = 200 * (10 ** 3)         # 240 kilobytes
 
 max_packet_size = 1 * (10 ** 3)     # 6 kilobytes
@@ -39,9 +39,9 @@ t_response = request_to_response(t_first_router, t_transmission, t_propagation)
 print(f"Answer 2c: {t_response}")
 
 # Question 2d - Time for the client to recieve the whole webpage
-total_packets = webpage_size / max_packet_size
+webpage_packets = webpage_size / max_packet_size
 
-t_webpage = request_to_webpage(t_response, total_packets, t_transmission)
+t_webpage = request_to_webpage(t_response, webpage_packets, t_transmission)
 print(f"Answer 2d: {t_webpage}")
 
 
@@ -54,3 +54,6 @@ t_small_packet = transmission_delay(small_packet_size, transmission_rate)
 t_image = request_to_image(t_webpage, image_packets,
                            rtt, t_transmission, t_small_packet)
 print(f"Answer  3: {t_image}")
+
+# Question 4 - Time for the client to receive the full webpage with all images.
+t_fullpage = time_fullpage(t_webpage, rtt, image_count, )
