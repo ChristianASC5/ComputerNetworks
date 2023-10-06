@@ -8,10 +8,10 @@ link_distance = 1000 * (10 ** 3)     # Each link is 3000 kilometers long
 propagation_speed = 1.9 * (10 ** 8)  # 1.8 * 10^8 meters/sec
 
 webpage_size = 13 * (10 ** 3)        # 17 kilobytes
-image_count = 11                          # 22 embedded images
+image_count = 11                     # 22 embedded images
 image_size = 200 * (10 ** 3)         # 240 kilobytes
 
-max_packet_size = 1 * (10 ** 3)     # 6 kilobytes
+max_packet_size = 1 * (10 ** 3)      # 6 kilobytes
 
 
 # Transmission Delay
@@ -55,12 +55,23 @@ t_image = request_to_image(t_webpage, image_packets,
                            rtt, t_transmission, t_small_packet)
 print(f"\nAnswer  3: {t_image}")
 
-# Question 4 - Time for the client to receive the full webpage with all images.
+# Question 4 - Time for the client to receive the full webpage with all images
 t_fullpage_0 = time_fullpage(t_webpage, image_count,
                              image_packets, rtt, t_transmission, t_small_packet)
 print(f"\nAnswer  4: {t_fullpage_0}")
 
-# Question 5 - Time for the client to receive the full webpage with all images using multiple TCP connections.
+# Question 5 - Time for the client to receive the full webpage with all images using multiple TCP connections
 t_fullpage_1 = time_fullpage(t_webpage, image_count,
                              image_packets, rtt, t_transmission, t_small_packet, multiple_connections=True)
 print(f"\nAnswer  5: {t_fullpage_1}")
+
+# Question 6 - Time fort the client to receive the full webpage with all images with persistant HTTP
+t_fullpage_2 = time_fullpage(t_webpage, image_count,
+                             image_packets, rtt, t_transmission, t_small_packet, True, True)
+print(f"\nAnswer  6: {t_fullpage_2}")
+
+print(
+    f"""
+Homework Site Formatted Answer: 
+{round(rtt, 3)},{round(t_server, 3)},{round(t_first_router, 3)},{round(t_response, 3)},{round(t_webpage, 3)},{round(t_image, 3)},{round(t_fullpage_0, 3)},{round(t_fullpage_1, 3)},{round(t_fullpage_2, 3)}
+""")

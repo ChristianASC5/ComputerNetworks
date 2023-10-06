@@ -126,7 +126,7 @@ def request_to_image(time_webpage, packet_count, rtt, t_t, small_packet_delay):
     return time_webpage + (2 * rtt) + ((2 + packet_count) * t_t) + small_packet_delay
 
 
-def time_fullpage(time_webpage, img_count, packet_count, rtt, t_t, small_packet_delay, multiple_connections=False):
+def time_fullpage(time_webpage, img_count, packet_count, rtt, t_t, small_packet_delay, multiple_connections=False, persistant=False):
     """
     Calculate the time elapsed from the HTTP request being transmitted to HTTP client receiving the full webpage with all images.
 
@@ -138,11 +138,20 @@ def time_fullpage(time_webpage, img_count, packet_count, rtt, t_t, small_packet_
     - t_t: The transmission delay of a network device.
     - small_packet_delay: Transmission delay of a packet that isn't the maximum packet size.
     - multiple_connections: Indicates whether or not multiple TCP connections are in use.
+    - persistant: Indicates whether or not HTTP is persistant.
 
     Returns:
     - time elapsed from the HTTP request being transmitted to HTTP client receiving the full webpage with all images.
     """
+
     if multiple_connections:
-        return time_webpage + (2 * rtt) + ((2 + packet_count) * t_t) + ((img_count - 1) * t_t * packet_count) + small_packet_delay
+        result_time = time_webpage + rtt + \
+            ((2 + packet_count) * t_t) + ((img_count - 1)
+                                          * t_t * packet_count) + small_packet_delay
+
+        if persistant:
+            return result_time
+
+        return result_time + rtt
     else:
         return time_webpage + (img_count * rtt) + ((2 + packet_count) * t_t) * img_count + small_packet_delay
