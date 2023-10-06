@@ -93,3 +93,19 @@ def request_to_response(req_to_router, t_t, t_p):
     """
 
     return req_to_router + t_t + t_p
+
+
+def request_to_webpage(req_to_resp, total_packets, t_t):
+    """
+    Calculate the time elapsed from the HTTP request being transmitted to HTTP client receiving the whole webpage.
+
+    Parameters:
+    - req_to_resp: Total time elapsed from the HTTP request being transmitted to HTTP client receiving the first response packet.
+    - total_packets: Total number of packets to be recieved by the HTTP client
+    - t_t: The transmission delay of a network device.
+
+    Returns:
+    - Total time elapsed from the HTTP request being transmitted to HTTP client receiving the whole webpage.
+    """
+
+    return req_to_resp + (total_packets-1) * t_t

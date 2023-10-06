@@ -7,7 +7,7 @@ routers = 2                          # The path includes 2 routers
 link_distance = 1000 * (10 ** 3)     # Each link is 3000 kilometers long
 propagation_speed = 1.9 * (10 ** 8)  # 1.8 * 10^8 meters/sec
 
-webpage_size = 17 * (10 ** 3)        # 17 kilobytes
+webpage_size = 13 * (10 ** 3)        # 17 kilobytes
 images = 22                          # 22 embedded images
 image_size = 240 * (10 ** 3)         # 240 kilobytes
 
@@ -36,8 +36,10 @@ print(f"Answer 2b: {req_to_router}")
 
 # Question 2c - Time for the first response packet to arrive at the HTTP client
 req_to_response = request_to_response(req_to_router, t_t, t_p)
-print(f"Answer 2c: {req_to_router}")
+print(f"Answer 2c: {req_to_response}")
 
-# Question 2d - Time for the first response packet to arrive at the HTTP client
-req_to_full_response = request_to_response(req_to_router, t_t, t_p)
-print(f"Answer 2d: {req_to_router}")
+# Question 2d - Time for the
+total_packets = webpage_size / max_packet_size
+
+req_to_full_response = request_to_webpage(req_to_response, total_packets, t_t)
+print(f"Answer 2d: {req_to_full_response}")
