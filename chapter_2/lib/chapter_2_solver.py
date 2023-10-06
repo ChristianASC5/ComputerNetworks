@@ -57,7 +57,7 @@ def request_to_server(rtt, t_t, t_p):
     - t_p: Propagation delay for data to travel over a single physical link.
 
     Returns:
-    - Total time for the first packet of a HTTP request to travel from a HTTP client to a HTTP server.
+    - Time for the first packet of a HTTP request to travel from a HTTP client to a HTTP server.
     """
 
     return rtt + (rtt / 2) + t_t + t_p
@@ -68,12 +68,12 @@ def request_to_router(req_server_time, t_t, t_p):
     Calculate the time for the first packet of a HTTP request to travel from a HTTP client to the first router on the connection path.
 
     Parameters:
-    - req_server_time: Total time for the first packet of a HTTP request to travel from a HTTP client to a HTTP server.
+    - req_server_time: Time for the first packet of a HTTP request to travel from a HTTP client to a HTTP server.
     - t_t: The transmission delay of a network device.
     - t_p: Propagation delay for data to travel over a single physical link.
 
     Returns:
-    - Total time for the first packet of a HTTP request to travel from a HTTP client to the first router on the connection path.
+    - Time for the first packet of a HTTP request to travel from a HTTP client to the first router on the connection path.
     """
 
     return req_server_time + t_t + t_p
@@ -84,12 +84,12 @@ def request_to_response(req_to_router, t_t, t_p):
     Calculate the time elapsed from the HTTP request being transmitted to HTTP client receiving the first response packet.
 
     Parameters:
-    - req_to_router: Total time for the first packet of a HTTP request to travel from a HTTP client to the first router on the connect path.
+    - req_to_router: Time for the first packet of a HTTP request to travel from a HTTP client to the first router on the connect path.
     - t_t: The transmission delay of a network device.
     - t_p: Propagation delay for data to travel over a single physical link.
 
     Returns:
-    - Total time elapsed from the HTTP request being transmitted to HTTP client receiving the first response packet.
+    - Time elapsed from the HTTP request being transmitted to HTTP client receiving the first response packet.
     """
 
     return req_to_router + t_t + t_p
@@ -100,12 +100,30 @@ def request_to_webpage(req_to_resp, total_packets, t_t):
     Calculate the time elapsed from the HTTP request being transmitted to HTTP client receiving the whole webpage.
 
     Parameters:
-    - req_to_resp: Total time elapsed from the HTTP request being transmitted to HTTP client receiving the first response packet.
-    - total_packets: Total number of packets to be recieved by the HTTP client
+    - req_to_resp: Time elapsed from the HTTP request being transmitted to HTTP client receiving the first response packet.
+    - total_packets: Number of packets to be recieved by the HTTP client.
     - t_t: The transmission delay of a network device.
 
     Returns:
-    - Total time elapsed from the HTTP request being transmitted to HTTP client receiving the whole webpage.
+    - Time elapsed from the HTTP request being transmitted to HTTP client receiving the whole webpage.
     """
 
     return req_to_resp + (total_packets-1) * t_t
+
+
+def request_to_image(req_to_web, img_packets, rtt, t_t, small_packet_delay):
+    """
+    Calculate the time elapsed from the HTTP request being transmitted to HTTP client receiving the first image.
+
+    Parameters:
+    - req_to_web: Time elapsed from the HTTP request being transmitted to HTTP client receiving the whole webpage.
+    - img_packet: Number of image packets to be received by the HTTP client.
+    - rtt: Time to send a TCP request and recieve a TCP response.
+    - t_t: The transmission delay of a network device.
+    - small_packet_delay: Transmission delay of a packet that isn't the maximum packet size.
+
+    Returns:
+    - Time elapsed from the HTTP request being transmitted to HTTP client receiving the first image.
+    """
+
+    return req_to_web + (2 * rtt) + ((2 + img_packets) * t_t) + small_packet_delay

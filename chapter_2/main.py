@@ -8,38 +8,49 @@ link_distance = 1000 * (10 ** 3)     # Each link is 3000 kilometers long
 propagation_speed = 1.9 * (10 ** 8)  # 1.8 * 10^8 meters/sec
 
 webpage_size = 13 * (10 ** 3)        # 17 kilobytes
-images = 22                          # 22 embedded images
-image_size = 240 * (10 ** 3)         # 240 kilobytes
+images = 11                          # 22 embedded images
+image_size = 200 * (10 ** 3)         # 240 kilobytes
 
 max_packet_size = 1 * (10 ** 3)     # 6 kilobytes
 
 
 # Transmission Delay
-t_t = transmission_delay(bits(max_packet_size), transmission_rate)
+t_transmission = transmission_delay(bits(max_packet_size), transmission_rate)
 
 # Propagation Delay
-t_p = propagation_delay(link_distance, propagation_speed)
+t_propagation = propagation_delay(link_distance, propagation_speed)
 
 # Question 1 - Round Trip Time
-rtt = round_trip_time(num_links, t_p)
-print(f"Answer 1 : {rtt}")
+rtt = round_trip_time(num_links, t_propagation)
+print(f"Answer 1 : {rtt}\n")
 
 # Question 2a - Time for the first packet to arrive at the server
-req_to_server = request_to_server(
-    rtt, t_t, t_p
+t_server = request_to_server(
+    rtt, t_transmission, t_propagation
 )
-print(f"Answer 2a: {req_to_server}")
+print(f"Answer 2a: {t_server}")
 
 # Question 2b - Time for the first packet to arrive at the first router
-req_to_router = request_to_router(req_to_server, t_t, t_p)
-print(f"Answer 2b: {req_to_router}")
+t_first_router = request_to_router(t_server, t_transmission, t_propagation)
+print(f"Answer 2b: {t_first_router}")
 
 # Question 2c - Time for the first response packet to arrive at the HTTP client
-req_to_response = request_to_response(req_to_router, t_t, t_p)
-print(f"Answer 2c: {req_to_response}")
+t_response = request_to_response(t_first_router, t_transmission, t_propagation)
+print(f"Answer 2c: {t_response}")
 
-# Question 2d - Time for the
+# Question 2d - Time for the client to recieve the whole webpage
 total_packets = webpage_size / max_packet_size
 
-req_to_full_response = request_to_webpage(req_to_response, total_packets, t_t)
-print(f"Answer 2d: {req_to_full_response}")
+t_webpage = request_to_webpage(t_response, total_packets, t_transmission)
+print(f"Answer 2d: {t_webpage}")
+
+
+# Question 3 - Time for the client to receive the first embedded image
+image_packets = image_size // max_packet_size
+
+small_packet_size = image_size % max_packet_size
+t_small_packet = transmission_delay(small_packet_size, transmission_rate)
+
+t_image = request_to_image(t_webpage, image_packets,
+                           rtt, t_transmission, t_small_packet)
+print(f"Answer  3: {t_image}")
