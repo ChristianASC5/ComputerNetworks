@@ -1,0 +1,2 @@
+class InsufficientDevicesException(Exception):
+    pass
