@@ -56,6 +56,11 @@ t_image = request_to_image(t_webpage, image_packets,
 print(f"\nAnswer  3: {t_image}")
 
 # Question 4 - Time for the client to receive the full webpage with all images.
-t_fullpage = time_fullpage(t_webpage, rtt, image_count,
-                           image_packets, t_transmission)
-print(f"\nAnswer  4: {t_fullpage}")
+t_fullpage_0 = time_fullpage(t_webpage, image_count,
+                             image_packets, rtt, t_transmission, t_small_packet)
+print(f"\nAnswer  4: {t_fullpage_0}")
+
+# Question 5 - Time for the client to receive the full webpage with all images using multiple TCP connections.
+t_fullpage_1 = time_fullpage(t_webpage, image_count,
+                             image_packets, rtt, t_transmission, t_small_packet, multiple_connections=True)
+print(f"\nAnswer  5: {t_fullpage_1}")
