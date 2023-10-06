@@ -8,10 +8,10 @@ link_distance = 1000 * (10 ** 3)     # Each link is 3000 kilometers long
 propagation_speed = 1.9 * (10 ** 8)  # 1.8 * 10^8 meters/sec
 
 webpage_size = 13 * (10 ** 3)        # 17 kilobytes
-image_count = 11                          # 22 embedded images
+image_count = 11                     # 22 embedded images
 image_size = 200 * (10 ** 3)         # 240 kilobytes
 
-max_packet_size = 1 * (10 ** 3)     # 6 kilobytes
+max_packet_size = 1 * (10 ** 3)      # 6 kilobytes
 
 
 # Transmission Delay
