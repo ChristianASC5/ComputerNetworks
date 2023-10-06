@@ -37,3 +37,7 @@ print(f"Answer 2b: {req_to_router}")
 # Question 2c - Time for the first response packet to arrive at the HTTP client
 req_to_response = request_to_response(req_to_router, t_t, t_p)
 print(f"Answer 2c: {req_to_router}")
+
+# Question 2d - Time for the first response packet to arrive at the HTTP client
+req_to_full_response = request_to_response(req_to_router, t_t, t_p)
+print(f"Answer 2d: {req_to_router}")
