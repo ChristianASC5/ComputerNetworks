@@ -53,7 +53,9 @@ t_small_packet = transmission_delay(small_packet_size, transmission_rate)
 
 t_image = request_to_image(t_webpage, image_packets,
                            rtt, t_transmission, t_small_packet)
-print(f"Answer  3: {t_image}")
+print(f"\nAnswer  3: {t_image}")
 
 # Question 4 - Time for the client to receive the full webpage with all images.
-t_fullpage = time_fullpage(t_webpage, rtt, image_count, )
+t_fullpage = time_fullpage(t_webpage, rtt, image_count,
+                           image_packets, t_transmission)
+print(f"\nAnswer  4: {t_fullpage}")

@@ -129,5 +129,6 @@ def request_to_image(time_webpage, packet_count, rtt, t_t, small_packet_delay):
     return time_webpage + (2 * rtt) + ((2 + packet_count) * t_t) + small_packet_delay
 
 
-def time_fullpage(time_webpage, rtt, img_count, packet_count, t_t):
-    return time_webpage + (img_count * rtt) + ((2 + packet_count) * t_t) * img_count
+def time_fullpage(time_webpage, rtt, img_count, packet_count, t_t, small_packet_delay):
+
+    return time_webpage + (img_count * rtt) + ((2 + packet_count) * t_t) * img_count + small_packet_delay
