@@ -129,6 +129,20 @@ def request_to_image(time_webpage, packet_count, rtt, t_t, small_packet_delay):
     return time_webpage + (2 * rtt) + ((2 + packet_count) * t_t) + small_packet_delay
 
 
-def time_fullpage(time_webpage, rtt, img_count, packet_count, t_t, small_packet_delay):
+def time_fullpage(time_webpage, img_count, packet_count, rtt, t_t, small_packet_delay):
+    """
+    Calculate the time elapsed from the HTTP request being transmitted to HTTP client receiving the full webpage with all images.
+
+    Parameters:
+    - time_webpage: Time elapsed from the HTTP request being transmitted to HTTP client receiving the whole webpage.
+    - img_count: Number of images.
+    - packet_count: Number of image packets to be received by the HTTP client.
+    - rtt: Time to send a TCP request and recieve a TCP response.
+    - t_t: The transmission delay of a network device.
+    - small_packet_delay: Transmission delay of a packet that isn't the maximum packet size.
+
+    Returns:
+    - time elapsed from the HTTP request being transmitted to HTTP client receiving the full webpage with all images.
+    """
 
     return time_webpage + (img_count * rtt) + ((2 + packet_count) * t_t) * img_count + small_packet_delay
