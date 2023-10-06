@@ -2,19 +2,6 @@ from custom_exceptions import InsufficientValueException
 from typing import List, Dict
 
 
-def bytes_to_bits(bytes: int) -> int:
-    """
-    Converts bytes to bits.
-
-    Parameters:
-    - bytes (int): The number of bytes to be converted.
-
-    Returns:
-    - The value after unit conversion.
-    """
-    return bytes * 8
-
-
 def transmission_delay(packet_size, link_speed):
     """
     Calculate transmission delay of a network device.
