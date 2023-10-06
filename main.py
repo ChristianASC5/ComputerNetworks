@@ -2,8 +2,8 @@ from lib.chapter_2_solver import *
 from lib.unit_conversions import bits
 
 transmission_rate = 5 * (10 ** 6)    # 9 megabits/sec
-links = 3                            # The path includes 3 links
-routers = 2                          # The path includes 2 routers
+num_links = 3                        # The path includes 3 links
+num_routers = 2                      # The path includes 2 routers
 link_distance = 1000 * (10 ** 3)     # Each link is 3000 kilometers long
 propagation_speed = 1.9 * (10 ** 8)  # 1.8 * 10^8 meters/sec
 
@@ -21,7 +21,7 @@ t_t = transmission_delay(bits(max_packet_size), transmission_rate)
 t_p = propagation_delay(link_distance, propagation_speed)
 
 # Question 1 - Round Trip Time
-rtt = round_trip_time(links, t_p)
+rtt = round_trip_time(num_links, t_p)
 print(f"Answer 1 : {rtt}")
 
 # Question 2a - Time for the first packet to arrive at the server
