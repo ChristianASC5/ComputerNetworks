@@ -1,2 +1,2 @@
-class InsufficientDevicesException(Exception):
+class InsufficientValueException(Exception):
     pass
